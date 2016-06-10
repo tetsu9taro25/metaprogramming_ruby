@@ -92,3 +92,8 @@ module M
     end
   end
 end
+
+# 他のモジュール名とクラス名がかぶってしまう場合、クラスをネームスペースでラップすれば良い
+module Bookworm
+  class Text
+  # ...
