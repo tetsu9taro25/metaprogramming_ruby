@@ -7,7 +7,11 @@ class Computer
 
   def self.define_component(name)
     define_method(name) do
-      # ...
+      info = @data_source.send "get_#{name}_info", @id
+      peice = @data_source.send "get_#{name}_peice", @id
+      result = "#{name.capiterize}: #{info} ($#{price})"
+      return "* #{result}" if peice >= 100
+      result
     end
   end
 end

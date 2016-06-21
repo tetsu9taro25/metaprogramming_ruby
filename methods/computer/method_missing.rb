@@ -13,3 +13,23 @@ class Computer
     result
   end
 end
+
+my_computer = Computer.new(42, DS.new)
+my_computer.cpu # => *Cpu 2.9Ghz quad-core ($120)
+my_computer.respond_to?(:cpu) # => false
+
+
+####################################
+# respond_to_missingのオーバーライド
+####################################
+
+class Computer
+  # ...
+
+  def responed_to_missing?(method, include_private = false)
+    @data_source.respond_to?("get_#{method}_info") || super
+  end
+end
+
+my_computer = Computer.new(42, DS.new)
+my_computer.respond_to?(:cpu) # => true
